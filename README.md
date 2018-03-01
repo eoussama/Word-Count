@@ -6,6 +6,7 @@ Nothing too ambitious is intended here, just making a simple text editor that sp
 
 ## Preview
 ![Prev](https://i.imgur.com/PDf74Y9.png)
+![Prev](https://i.imgur.com/CxjQfEE.png)
 
 ## Features
 - [X] Opening and Saving text files.
