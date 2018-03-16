@@ -1,0 +1,12 @@
+c:\users\eoussama\source\repos\Word Count\Word Count\bin\Debug\Word Count.exe.config
+c:\users\eoussama\source\repos\Word Count\Word Count\bin\Debug\Word Count.exe
+c:\users\eoussama\source\repos\Word Count\Word Count\bin\Debug\Word Count.pdb
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word Count.csprojResolveAssemblyReference.cache
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word_Count.fWordCount.resources
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word_Count.Properties.Resources.resources
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word Count.csproj.GenerateResource.Cache
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word Count.csproj.CoreCompileInputs.cache
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word Count.exe
+c:\users\eoussama\source\repos\Word Count\Word Count\obj\Debug\Word Count.pdb
+C:\Users\Eoussama\source\repos\Word Count\Word Count\obj\Debug\Word_Count.forms.fSettings.resources
+C:\Users\Eoussama\source\repos\Word Count\Word Count\obj\Debug\Word_Count.forms.fStats.resources
