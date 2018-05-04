@@ -4,6 +4,10 @@
 
     public static class Config
     {
+        public static readonly string author = "Eoussama";
+        public static readonly string title = "Word Count";
+        public static readonly string version = "1.0.0";
+
         private static bool syntax;
         private static Lang lang;
 

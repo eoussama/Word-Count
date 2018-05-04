@@ -1,16 +1,6 @@
 [Title: Word Count]
-[Version: Version 0.2]
-[New feature: “Clear document” option added.]
-[New feature: Added buttons to control the font style (bold/regular/italic/underlined/strikout).]
-[New feature: Size control option added.]
-[New feature: Text Color and highlight options added.]
-[New feature: Syntax highlight]
-[New feature: Ability to switch on and off syntax highlighting.]
-[Change: Simple UI changes.]
-[Change: Placeholder removed.]
-[Change: Document reset amted up.]
-[Fix: Bug fixes with the Paste/Copy/Cut functions.]
-[Fix: Size reset when changing the font style.]
-[Fix: App crash when changing the font size to 0.]
+[Version: 1.0.0]
+[New feature: Better code organization.]
+[New feature: More statistic information.]
 
-Last saved on 3/7/2018 3:08:26 PM
+Last saved on 5/4/2018 8:04:47 PM

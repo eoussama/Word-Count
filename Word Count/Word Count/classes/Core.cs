@@ -1,8 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Word_Count.classes
 {
@@ -65,31 +63,31 @@ namespace Word_Count.classes
             {
                 case Style.Regular:
                 {
-                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font.FontFamily, fWordCount.textField.SelectionFont.Size, FontStyle.Regular);
+                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font, FontStyle.Regular);
                     break;
                 }
 
                 case Style.Bold :
                 {
-                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font.FontFamily, fWordCount.textField.SelectionFont.Size, FontStyle.Bold);
+                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font, FontStyle.Bold);
                     break;
                 }
 
                 case Style.Italic:
                 {
-                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font.FontFamily, fWordCount.textField.SelectionFont.Size, FontStyle.Italic);
+                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font, FontStyle.Italic);
                     break;
                 }
 
                 case Style.Underline:
                 {
-                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font.FontFamily, fWordCount.textField.SelectionFont.Size, FontStyle.Underline);
+                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font, FontStyle.Underline);
                     break;
                 }
 
                 case Style.Strike:
                 {
-                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font.FontFamily, fWordCount.textField.SelectionFont.Size, FontStyle.Strikeout);
+                    fWordCount.textField.SelectionFont = new Font(fWordCount.textField.Font, FontStyle.Strikeout);
                     break;
                 }
             }
@@ -120,34 +118,17 @@ namespace Word_Count.classes
             
         }
 
-        public static void SyntaxHighlight(Lang lang, bool off = false)
+        public static void SyntaxHighlight()
         {
-            if(off)
-                fWordCount.textField.Text = fWordCount.textField.Text;
+            Regex regexKeywords = new Regex(@"\b(for|return|sizeof|int|string|float|char|if|new|stock|public|true|false)\b");
+            int selIndex = fWordCount.textField.SelectionStart;
 
-            else
+            foreach(Match match in regexKeywords.Matches(fWordCount.textField.Text))
             {
-                switch (lang)
-                {
-                    case Lang.pawn:
-                    {
-                        Regex regexKeywords = new Regex(@"\b(for|return|sizeof|int|string|float|char|if|new|stock|public|true|false)\b");
-                        int selIndex = fWordCount.textField.SelectionStart;
-
-                        foreach (Match match in regexKeywords.Matches(fWordCount.textField.Text))
-                        {
-                            fWordCount.textField.Select(match.Index, match.Value.Length);
-                            fWordCount.textField.SelectionColor = Color.Blue;
-                            fWordCount.textField.SelectionStart = selIndex;
-                            fWordCount.textField.SelectionColor = Color.Black;
-                        }
-
-                        fWordCount.textField.SelectionStart = selIndex;
-                        fWordCount.textField.SelectionColor = Color.Black;
-
-                        break;
-                    }
-                }
+                fWordCount.textField.Select(match.Index, match.Value.Length);
+                fWordCount.textField.SelectionColor = Color.Blue;
+                fWordCount.textField.SelectionStart = selIndex;
+                fWordCount.textField.SelectionColor = Color.Black;
             }
         }
 
@@ -186,66 +167,6 @@ namespace Word_Count.classes
             }
 
             return count;
-        }
-
-        public static string getCharsCount()
-        {
-            int[] stats = new int[90-65];
-            string output = string.Empty;
-
-            for (int i = 65; i<90; i++)
-            {
-                stats[i - 65] = fWordCount.textField.Text.Trim().ToUpper().Count(__ch => __ch == (char)i);
-            }
-
-            for (int i = 0; i < stats.Length; i++)
-            {
-                output += $"{(char)(i + 65)}: {stats[i]}{System.Environment.NewLine}";
-            }
-
-            return output;
-        }
-
-        public static string getWordsCount()
-        {
-            Dictionary<string, int> stats = new Dictionary<string, int>();
-            string output = string.Empty;
-
-            foreach (string word in fWordCount.textField.Text.Trim().ToUpper().Split(' '))
-            {
-                stats[word] = fWordCount.textField.Text.Trim().ToUpper().Split(' ').Count(w  => w == word && w != " ");
-            }
-
-            foreach (var stat in stats)
-            {
-                output += $"{stat.Key}: {stat.Value}{System.Environment.NewLine}";
-            }
-
-            return output;
-        }
-
-        public static string getWordMost()
-        {
-            Dictionary<string, int> stats = new Dictionary<string, int>();
-
-            foreach (string word in fWordCount.textField.Text.Trim().ToUpper().Split(' '))
-            {
-                stats[word] = fWordCount.textField.Text.Trim().ToUpper().Split(' ').Count(w => w == word && w != " ");
-            }
-
-            return $"{(from stat in stats where stat.Value == stats.Values.Max() select stat.Key).First()} ({stats.Values.Max()})";
-        }
-
-        public static string getCharMost()
-        {
-            Dictionary<char, int> stats = new Dictionary<char, int>();
-
-            for (int i = 65; i < 90; i++)
-            {
-                stats[(char)i] = fWordCount.textField.Text.Trim().ToUpper().Count(__ch => __ch == (char)i);
-            }
-
-            return $"{(from stat in stats where stat.Value == stats.Values.Max() select stat.Key).First()} ({stats.Values.Max()})";
         }
     }
 }

@@ -57,15 +57,25 @@ namespace Word_Count
             label_wordCount.Text = (from word in richTextBox_main.Text.Trim().Split(new char[] { '\n', ' ', '.', ',', '!', '?', ':', ';', '/', '\\', '@' }, StringSplitOptions.RemoveEmptyEntries) where word.ToLowerInvariant() != " " select word).Count().ToString();
             label_spaceCount.Text = (Core.getCharCount(1) - Core.getCharCount(2)).ToString();
             label_lineCount.Text = Core.getLineCount().ToString();
-
-            if(classes.Config.Syntax == true)
-                Core.SyntaxHighlight(Config.Lang);
+            Core.SyntaxHighlight();
         }
 
-        private void richTextBox_main_SelectionChanged(object sender, EventArgs e)
+        private void richTextBox_main_MouseClick(object sender, MouseEventArgs e)
         {
-            if (richTextBox_main.SelectionLength > 0)
-                nudSize.Value = (int)richTextBox_main.SelectionFont.Size;
+            if (richTextBox_main.Text == "Input a text here...")
+            {
+                richTextBox_main.ForeColor = SystemColors.WindowText;
+                richTextBox_main.Clear();
+            }
+        }
+
+        private void richTextBox_main_Leave(object sender, EventArgs e)
+        {
+            if (richTextBox_main.Text.Length == 0)
+            {
+                richTextBox_main.ForeColor = Color.DarkGray;
+                richTextBox_main.Text = "Input a text here...";
+            }
         }
 
 
@@ -190,48 +200,26 @@ namespace Word_Count
         private void clearDocumentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox_main.Clear();
-            nudSize.Value = 9;
-            cbAlign.SelectedIndex = 0;
-            cbFont.SelectedItem = "Consolas";
-            richTextBox_main.SelectionAlignment = HorizontalAlignment.Left;
-            richTextBox_main.Font = new Font("Consolas", 9, FontStyle.Regular);
-            richTextBox_main.SelectionFont = new Font("Arial", richTextBox_main.SelectionFont.Size, richTextBox_main.SelectionFont.Style);
-            richTextBox_main.SelectionColor = Color.Black;
-            richTextBox_main.SelectionBackColor = SystemColors.Window;
-            richTextBox_main.ForeColor = Color.Black;
-            richTextBox_main.BackColor = SystemColors.Window;
-        }
-
-        private void statisticsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            forms.fStats form = new forms.fStats();
-            form.ShowDialog();
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            forms.fSettings form = new forms.fSettings();
-            form.ShowDialog();
         }
 
         // ToolStrip - About --------------------------------------------------------------------------------------
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"A very simple word counting programme, made on 12/29/2017 - 11:40PM by {Config.author}", $"About - {Config.title} {Config.version}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("A very simple word counting programme, made on 12/29/2017 - 11:40PM", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
         // Toolbox ------------------------------------------------------------------------------------------------
-        private void bRegular_Click(object sender, EventArgs e)
-        {
-            if (richTextBox_main.SelectionLength > 0)
-                Core.ChangeStyle(Style.Regular);
-        }
-
         private void bBold_Click(object sender, EventArgs e)
         {
             if(richTextBox_main.SelectionLength > 0)
                 Core.ChangeStyle(Style.Bold);
+        }
+
+        private void bRegular_Click(object sender, EventArgs e)
+        {
+            if (richTextBox_main.SelectionLength > 0)
+                Core.ChangeStyle(Style.Regular);
         }
 
         private void bItalic_Click(object sender, EventArgs e)
